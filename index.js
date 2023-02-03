@@ -303,7 +303,7 @@ let calculateData = (arr) => {
   let minAge = arr[0];
   for (let i = 0; i < arr.length; i++) {
     let age1 =
-      (new Date() - new Date(maxAge.age)) / (1000 * 60 * 60 * 24 * 365);
+      (new Date() - new Date(minAge.age)) / (1000 * 60 * 60 * 24 * 365);
     let age2 =
       (new Date() - new Date(arr[i].age)) / (1000 * 60 * 60 * 24 * 365);
     if (age2 < age1) {
@@ -333,11 +333,15 @@ let calculateData = (arr) => {
     Age: {
       Highest: {
         name: maxAge.name,
-        age: Math.floor((new Date() - new Date(maxAge.age)) / (1000 * 60 * 60 * 24 * 365)),
+        age: Math.floor(
+          (new Date() - new Date(maxAge.age)) / (1000 * 60 * 60 * 24 * 365)
+        ),
       },
       Lowest: {
         name: minAge.name,
-        age: Math.floor((new Date() - new Date(minAge.age)) / (1000 * 60 * 60 * 24 * 365)),
+        age: Math.floor(
+          (new Date() - new Date(minAge.age)) / (1000 * 60 * 60 * 24 * 365)
+        ),
       },
       Average: Math.floor(avgAge),
     },
@@ -347,3 +351,54 @@ let calculateData = (arr) => {
 };
 
 console.log(calculateData(dataStudent));
+
+///////////////////////////////////////////////////////////////////////////
+
+// Create a function to check if two objects are equal
+
+let equal = (obj1, obj2) => {
+  if (JSON.stringify(obj1) == JSON.stringify(obj2)) {
+    return "This two objects are equal";
+  } else {
+    return "This two objects are different";
+  }
+};
+
+console.log(equal({ a: 1, b: 2 }, { a: 1, b: 2 }));
+
+/////////////////////////////////////////////////////////////////////////////
+
+// Create a function to get the intersection of two objects
+
+let intersection = (obj1, obj2) => {
+  // let arr1 = []; // ["a: 1", "b: 2"]
+  // let arr2 = []; // ["a: 1", "c: 3"]
+
+  // for (let key in obj1) {
+  //   arr1.push(`${key}: ${obj1[key]}`);
+  // }
+
+  // for (let key in obj2) {
+  //   arr2.push(`${key}: ${obj2[key]}`);
+  // }
+
+  // for (let i = 0; i < arr1.length; i++) {
+  //   let res = [];
+  //   for (let j = 0; j < arr2.length; j++) {
+  //     if (arr1[i] == arr2[j]) {
+  //       res.push(arr1[i]);
+  //     }
+  //   }
+  //   return res;
+  // }
+
+  let res = {};
+  for (let key of Object.keys(obj1)) {
+    if (obj1[key] == obj2[key]) {
+      res[key] = obj2[key];
+    }
+  }
+  return res;
+};
+
+console.log(intersection({ a: 1, b: 2 }, { a: 1, c: 3 }));
